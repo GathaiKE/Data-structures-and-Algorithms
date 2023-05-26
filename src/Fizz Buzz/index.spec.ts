@@ -1,33 +1,8 @@
 import {fizzBuzz} from './index'
 
-// describe('fizzBuzz',()=>{
-//     it('Should return 1',()=>{
-//         expect(fizzBuzz(1)).toBe(1)
-//     })
-
-//     it('should return Fizz',()=>{
-//         expect(fizzBuzz(3)).toBe('Fizz')
-//     })
-
-//     it('should return Buzz',()=>{
-//         expect(fizzBuzz(5)).toBe('Buzz')
-//     })
-
-//     it('should return FizzBuzz',()=>{
-//         expect(fizzBuzz(15)).toContain('FizzBuzz')
-//     })
-// })
 
 describe('fizzBuzz', () => {
     let consoleLogSpy= jest.spyOn(console, 'log');;
-
-// beforeEach(() => {
-//     consoleLogSpy 
-// });
-
-// afterEach(() => {
-//     consoleLogSpy.mockRestore();
-// });
 
 it('returns "FizzBuzz" for numbers divisible by both 3 and 5', () => {
     fizzBuzz(15);
