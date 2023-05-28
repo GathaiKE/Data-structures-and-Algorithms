@@ -10,5 +10,5 @@ export  const fizzBuzz=(num:number): string | number=>{
             return num
     }
     }
-    console.log(fizzBuzz(85));
+    console.log(fizzBuzz(1));
     

@@ -1,51 +1,111 @@
-import {fizzBuzz} from './index'
+import { fizzBuzz } from './index';
 
-// describe('fizzBuzz',()=>{
-//     it('Should return 1',()=>{
-//         expect(fizzBuzz(1)).toBe(1)
-//     })
+let consoleSpy: jest.SpyInstance
 
-//     it('should return Fizz',()=>{
-//         expect(fizzBuzz(3)).toBe('Fizz')
-//     })
+beforeEach(() => {
+    consoleSpy = jest.spyOn(console, 'log').mockImplementation()
+})
 
-//     it('should return Buzz',()=>{
-//         expect(fizzBuzz(5)).toBe('Buzz')
-//     })
+afterEach(() => {
+    consoleSpy.mockRestore()
+})
 
-//     it('should return FizzBuzz',()=>{
-//         expect(fizzBuzz(15)).toContain('FizzBuzz')
-//     })
+it('Returns the input if it is not divisible by either 3 or 5', () => {
+    let input = 1
+    fizzBuzz(input)
+    expect(consoleSpy).toHaveBeenCalledWith(input)
+})
+
+it('Returns "Fizz" input divisible by 3', () => {
+    fizzBuzz(6)
+    expect(consoleSpy).toHaveBeenCalledWith('Fizz')
+})
+
+it('Returns "Buzz" input divisible by 5', () => {
+    fizzBuzz(10)
+    expect(consoleSpy).toHaveBeenCalledWith('Buzz')
+})
+
+it('Returns "FizzBuzz" if the input number is divisible by both 3 and 5', () => {
+    fizzBuzz(15)
+    expect(consoleSpy).toHaveBeenCalledWith('FizzBuzz')
+})
+
+it('Handles negative input', () => {
+    fizzBuzz(-3)
+    expect(consoleSpy).toHaveBeenCalledWith('Fizz')
+})
+
+it('Handles zero as an input', () => {
+    fizzBuzz(0)
+    expect(consoleSpy).toHaveBeenCalledWith('FizzBuzz')
+})
+
+it('should handle decimal numbers as inputs', () => {
+    fizzBuzz(2.5)
+    expect(consoleSpy).toHaveBeenCalledWith(2.5)
+})
+
+it('should handle large input numbers', () => {
+    fizzBuzz(1000)
+    expect(consoleSpy).toHaveBeenCalledWith('Buzz')
+})
+
+it('should handle non-integer input numbers', () => {
+    fizzBuzz(7.8)
+    expect(consoleSpy).toHaveBeenCalledWith(7.8)
+})
+
+it('should handle NaN as an input', () => {
+    fizzBuzz(NaN)
+    expect(consoleSpy).toHaveBeenCalledWith(NaN)
+})
+
+// it('should return the input number if it is not divisible by 3 or 5', () => {
+//     let input = 1
+//     expect(fizzBuzz(input)).toBe(input)
+//     // expect(fizzBuzz(2)).toBe(2)
+//     // expect(fizzBuzz(7)).toBe(7)
 // })
 
-describe('fizzBuzz', () => {
-    let consoleLogSpy= jest.spyOn(console, 'log');;
+// it('should return "Fizz" if the input number is divisible by 3', () => {
+// expect(fizzBuzz(3)).toBe('Fizz')
+// expect(fizzBuzz(6)).toBe('Fizz')
+// expect(fizzBuzz(9)).toBe('Fizz')
+// })
 
-// beforeEach(() => {
-//     consoleLogSpy 
-// });
+// it('should return "Buzz" if the input number is divisible by 5', () => {
+// expect(fizzBuzz(5)).toBe('Buzz')
+// expect(fizzBuzz(10)).toBe('Buzz')
+// expect(fizzBuzz(20)).toBe('Buzz')
+// })
 
-// afterEach(() => {
-//     consoleLogSpy.mockRestore();
-// });
+// it('should return "FizzBuzz" if the input number is divisible by both 3 and 5', () => {
+// expect(fizzBuzz(15)).toBe('FizzBuzz')
+// expect(fizzBuzz(30)).toBe('FizzBuzz')
+// expect(fizzBuzz(45)).toBe('FizzBuzz')
+// })
 
-it('returns "FizzBuzz" for numbers divisible by both 3 and 5', () => {
-    fizzBuzz(15);
-    expect(consoleLogSpy).toHaveBeenCalledWith('FizzBuzz');
-});
+// it('should handle negative input numbers', () => {
+// expect(fizzBuzz(-3)).toBe('Fizz')
+// expect(fizzBuzz(-5)).toBe('Buzz')
+// expect(fizzBuzz(-15)).toBe('FizzBuzz')
+// })
 
-it('returns "Fizz" for numbers divisible by 3', () => {
-    fizzBuzz(3);
-    expect(consoleLogSpy).toHaveBeenCalledWith('Fizz');
-});
+// it('should handle zero as an input', () => {
+// expect(fizzBuzz(0)).toBe('FizzBuzz')
+// })
 
-it('returns "Buzz" for numbers divisible by 5', () => {
-    fizzBuzz(5);
-    expect(consoleLogSpy).toHaveBeenCalledWith('Buzz');
-});
+// it('should handle decimal numbers as inputs', () => {
+// expect(fizzBuzz(2.5)).toBe(2.5)
+// expect(fizzBuzz(7.8)).toBe(7.8)
+// })
 
-it('returns the input number for numbers not divisible by 3 or 5', () => {
-    fizzBuzz(1);
-    expect(consoleLogSpy).toHaveBeenCalledWith(1);
-});
-});
+// it('should handle large input numbers', () => {
+// expect(fizzBuzz(1000)).toBe('Buzz')
+// expect(fizzBuzz(1500)).toBe('FizzBuzz')
+// })
+
+// it('should handle NaN as an input', () => {
+// expect(fizzBuzz(NaN)).toBe(NaN)
+// })
